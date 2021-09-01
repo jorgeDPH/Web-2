@@ -1,46 +1,44 @@
 import "./App.css";
 import "./index.css";
-import React, { useState, useContext,useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
+
+
 function App() {
   
-  const [users, setUsers] = useState([{ id: 0, name: "Jorge" }]);
-
-  const onClick = () => {
-    setUsers ([...users,{id: users.length, name: "Roa"}])
-  };  
-
-  var dataComponent={
-    type:"button",
-    value:"update",
-    hidden:false
-  }
-
   const [date, setDate] = useState(new Date());
+  const [seconds, setSeconds] = useState(0);
+  const [minutos, setMinutos] = useState(0);
+  const [horas, setHoras] = useState(0);
 
-  useEffect(() =>{
+  
+  useEffect(() => {
+    let interval = null;
+    
+      interval = setInterval(() => {
+        if (seconds > 59){
+          setMinutos(minutos => minutos + 1);  
+          setSeconds(0);
+        }
+        else if (minutos>59){
+          setHoras(horas => horas + 1);  
+          setMinutos(0);  
+          setSeconds(0);
 
-    var timerID = setInterval(()=> tick(),1000)
-
-    return function cleanup(params){
-      clearInterval(timerID)
-    }
+        }
+        else{
+        setSeconds(seconds => seconds + 1);
+        }
+      }, 100);
+    
+    return () => clearInterval(interval);
   });
 
-  function tick(){
-    setDate(new Date());
-  }
-
+  
   return (
     <div>
-      <input onClick={onClick} {...dataComponent} />
-      <div>
-        <h1>{date.toLocaleTimeString()}</h1>
-        {users.map((e) => (
-          <div>
-            {e.id} - {e.name}
-          </div>
-        ))}
-      </div>
+      {horas} - {minutos} - {seconds}
+      
+      
     </div>
   );
 }
