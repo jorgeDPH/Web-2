@@ -1,16 +1,11 @@
-import "./App.css";
-import "./index.css";
-import React, { useState, useContext, useEffect } from "react";
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
-<<<<<<< Updated upstream
-
-function App() {
-  
-  const [date, setDate] = useState(new Date());
-  const [seconds, setSeconds] = useState(0);
-  const [minutos, setMinutos] = useState(0);
-  const [horas, setHoras] = useState(0);
-=======
 
 import { Home,About, Dashboard } from "./components/NewInput";
 
@@ -62,42 +57,7 @@ export default function BasicExample() {
       </Switch>
 
     </Router>
->>>>>>> Stashed changes
 
-  
-  useEffect(() => {
-    let interval = null;
     
-      interval = setInterval(() => {
-        if (seconds > 59){
-          setMinutos(minutos => minutos + 1);  
-          setSeconds(0);
-        }
-        else if (minutos>59){
-          setHoras(horas => horas + 1);  
-          setMinutos(0);  
-          setSeconds(0);
-
-        }
-        else{
-        setSeconds(seconds => seconds + 1);
-        }
-      }, 100);
-    
-    return () => clearInterval(interval);
-  });
-
-  
-  return (
-    <div>
-      {horas} - {minutos} - {seconds}
-      
-      
-    </div>
   );
 }
-<<<<<<< Updated upstream
-
-export default App;
-=======
->>>>>>> Stashed changes
